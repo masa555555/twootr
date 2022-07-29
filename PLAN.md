@@ -34,3 +34,23 @@ const twoots = [twoot1,twoot2, ...];
 # Data Map
 
 # Styling Patterns (Fonts and Colors)
+
+```js
+
+const [user,setUser] = useState("");
+
+const handleInputValue = () => {
+  // check input value
+}
+
+const handleUpdateUser = () => {
+  // use setUer here to update state
+}
+
+<input onChange={handleInputValue} />
+<input onChange={handleInputValue}  />
+
+<BsPencilSquare onClick={handleUpdateUser} />
+
+
+```
