@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { IoFlagSharp } from "react-icons/io5";
 
-const TwootCardStyle = styled.div`
+const TwootCardStyle = styled.li`
   box-shadow: 0 0 0 #333;
   border: 3px solid #333;
   padding: 1rem;
+  margin-bottom: 1rem;
 
   img {
     width: 40px;
@@ -25,6 +26,7 @@ const TwootCardStyle = styled.div`
 
   & .card-top,
   & .card-bottom {
+    padding: 0 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -37,12 +39,14 @@ const TwootCardStyle = styled.div`
     align-items: center;
   }
 
-  & .card-input {
-    padding-top: 1rem;
+  & .card-content {
+    padding: 1.5rem 0 0.5rem 1rem;
+    font-weight: bold;
+    border-bottom: 3px solid #333;
   }
 
   & .card-bottom {
-    padding: 1rem 1rem 0;
+    padding-top: 1rem;
   }
 
   & .icons {
@@ -54,26 +58,39 @@ const TwootCardStyle = styled.div`
   }
 `;
 
-const TwootCard = () => {
+const TwootCard = (props) => {
+  const {
+    key,
+    id,
+    author,
+    authorSlug,
+    content,
+    dateAdded,
+    dateModified,
+    length,
+    tags,
+  } = props;
+
   return (
     <TwootCardStyle>
       <section className="card-top">
         <div className="userProfile">
           <img
-            src="https://avatars.dicebear.com/api/bottts/authorSlug.svg"
+            src={`https://avatars.dicebear.com/api/bottts/${authorSlug}.svg`}
             alt=""
           />
-          <span>Henry David Throeau</span>
+          <span>{author}</span>
         </div>
         <div className="username">
-          <span>@henry-david-throeau</span>
+          <span>@{author}</span>
         </div>
       </section>
-      <section className="card-input">
-        <input type="text" placeholder="Enter your twoot" />
+      <section className="card-content">
+        <p className="">{content}</p>
+        {/* <input type="text" placeholder={content} /> */}
       </section>
       <section className="card-bottom">
-        <span className="date">Twooted 22 days ago</span>
+        <span className="date">Twooted {length} days ago</span>
         <div className="icons">
           <IoFlagSharp />
           <AiOutlineRetweet />
