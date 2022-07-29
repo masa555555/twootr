@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { AiOutlineCheck } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
-// import userImgUrl from "https://avatars.dicebear.com/api/bottts/authorSlug.svg";
 
 const HeroStyle = styled.div`
   min-height: 200px;
@@ -42,14 +42,32 @@ const HeroStyle = styled.div`
   }
 
   & .userInfo {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center; */
     text-align: center;
+    min-height: 60px;
+
+    & input {
+      width: 80px;
+    }
+  }
+
+  & .userInfo-form {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
   }
 `;
 
 const Hero = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleInputValue = () => {};
+  const handleUpdateUser = () => {
+    setIsEditing(false);
+  };
+  const handleOpenForm = () => {
+    setIsEditing(true);
+  };
+
   return (
     <HeroStyle>
       <div className="hero-container">
@@ -60,10 +78,21 @@ const Hero = () => {
           />
         </section>
         <section className="userInfo">
-          <h3>
-            Joe <span>Doe</span> <BsPencilSquare />
-          </h3>
-          <span>@joe-doe</span>
+          {isEditing && (
+            <div className="userInfo-form">
+              <input type="text" onChange={handleInputValue} />
+              <input type="text" onChange={handleInputValue} />
+              <AiOutlineCheck onClick={handleUpdateUser} />
+            </div>
+          )}
+          {!isEditing && (
+            <div className="userInfo-currentUser">
+              <h3>
+                Joe <span>Doe</span> <BsPencilSquare onClick={handleOpenForm} />
+              </h3>
+              <span>@joe-doe</span>
+            </div>
+          )}
         </section>
       </div>
     </HeroStyle>
