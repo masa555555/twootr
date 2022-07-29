@@ -1,0 +1,6 @@
+- User Stories / Job Stories
+- Data Structure
+- HTML Structure
+- Component Structure
+- Data Map
+- Styling Patterns (Fonts and Colors)
