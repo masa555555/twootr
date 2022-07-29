@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { IoFlagSharp } from "react-icons/io5";
@@ -60,7 +60,6 @@ const TwootCardStyle = styled.li`
 
 const TwootCard = (props) => {
   const {
-    key,
     id,
     author,
     authorSlug,
@@ -70,6 +69,29 @@ const TwootCard = (props) => {
     length,
     tags,
   } = props;
+
+  const [diffDate, setDiffDate] = useState();
+
+  const checkDateGap = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    const today = new Date(year, month, day);
+    const dateData = dateModified
+      ? dateModified.split("-")
+      : dateAdded.split("-");
+    const past = new Date(dateData[0], dateData[1], dateData[2]);
+
+    const diffMillSec = past - today;
+    const diffDays = parseInt(diffMillSec / 1000 / 60 / 60 / 24);
+    setDiffDate(diffDays);
+  };
+
+  useEffect(() => {
+    checkDateGap();
+  }, []);
 
   return (
     <TwootCardStyle>
@@ -87,10 +109,9 @@ const TwootCard = (props) => {
       </section>
       <section className="card-content">
         <p className="">{content}</p>
-        {/* <input type="text" placeholder={content} /> */}
       </section>
       <section className="card-bottom">
-        <span className="date">Twooted {length} days ago</span>
+        <span className="date">Twooted {diffDate && diffDate} days ago</span>
         <div className="icons">
           <IoFlagSharp />
           <AiOutlineRetweet />
