@@ -19,7 +19,7 @@ const NewTwootFormStyle = styled.div`
     background: #711a75;
   }
 
-  input {
+  textarea {
     width: 100%;
     outline: none;
     border: none;
@@ -50,7 +50,7 @@ const NewTwootForm = () => {
       </section>
       <section className="new-twoot-form">
         <div className="form-top">
-          <input type="text" placeholder="What are you humming about?" />
+          <textarea type="text" placeholder="What are you humming about?" />
         </div>
         <div className="form-bottom">
           <button>Twoot</button>
