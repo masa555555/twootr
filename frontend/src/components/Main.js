@@ -11,12 +11,14 @@ const MainWrapper = styled.div`
 
 const Main = () => {
   return (
-    <MainWrapper className="">
-      <Nav />
-      <Hero />
-      <NewTwootForm />
-      <TwootsList />
-    </MainWrapper>
+    <>
+      <MainWrapper className="">
+        <Nav />
+        <Hero />
+        <NewTwootForm />
+        <TwootsList />
+      </MainWrapper>
+    </>
   );
 };
 
