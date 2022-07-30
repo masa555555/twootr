@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const NewTwootFormStyle = styled.form`
   padding: 2rem 100px 0;
@@ -33,7 +34,8 @@ const NewTwootFormStyle = styled.form`
   }
 
   & .form-title {
-    padding-top: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 0.5rem;
   }
 
   & .form-bottom {
@@ -60,6 +62,8 @@ const NewTwootForm = (props) => {
   const [wordCount, setWordCount] = useState(140);
   const textInputRef = useRef();
 
+  const notify = (text) => toast(text);
+
   const handleCount = (e) => {
     const length = e.target.value.length;
     if (length > 140) {
@@ -71,7 +75,6 @@ const NewTwootForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(textInputRef.current.value);
     if (textInputRef.current.value === "") {
       alert("Invalid input");
       return;
@@ -88,31 +91,36 @@ const NewTwootForm = (props) => {
     axios
       .post("http://localhost:8080/twoot", { newTwoot })
       .then((res) => {
-        console.log(res.data);
         setIsUpdate(!isUpdate);
+        textInputRef.current.value = "";
+        setWordCount(140);
+        notify("Successfully twooted!");
       })
       .catch((error) => console.log(error));
   };
+
   return (
-    <NewTwootFormStyle onSubmit={handleSubmit} id="newTwootForm">
-      <section className="form-title">
-        <h2>Compose Twoot</h2>
-      </section>
-      <section className="new-twoot-form">
-        <div className="form-top">
-          <textarea
-            onChange={handleCount}
-            ref={textInputRef}
-            type="text"
-            placeholder="What are you humming about?"
-          />
-        </div>
-        <div className="form-bottom">
-          <button>Twoot</button>
-          <span>{wordCount}</span>
-        </div>
-      </section>
-    </NewTwootFormStyle>
+    <>
+      <NewTwootFormStyle onSubmit={handleSubmit} id="newTwootForm">
+        <section className="form-title">
+          <h2>Compose Twoot</h2>
+        </section>
+        <section className="new-twoot-form">
+          <div className="form-top">
+            <textarea
+              onChange={handleCount}
+              ref={textInputRef}
+              type="text"
+              placeholder="What are you humming about?"
+            />
+          </div>
+          <div className="form-bottom">
+            <button>Twoot</button>
+            <span>{wordCount}</span>
+          </div>
+        </section>
+      </NewTwootFormStyle>
+    </>
   );
 };
 
