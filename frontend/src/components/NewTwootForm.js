@@ -33,6 +33,7 @@ const NewTwootFormStyle = styled.form`
   }
 
   & .form-title {
+    margin-top: 1.5rem;
     padding-top: 1rem;
   }
 
@@ -71,7 +72,6 @@ const NewTwootForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(textInputRef.current.value);
     if (textInputRef.current.value === "") {
       alert("Invalid input");
       return;
@@ -88,7 +88,6 @@ const NewTwootForm = (props) => {
     axios
       .post("http://localhost:8080/twoot", { newTwoot })
       .then((res) => {
-        console.log(res.data);
         setIsUpdate(!isUpdate);
       })
       .catch((error) => console.log(error));

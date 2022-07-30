@@ -4,6 +4,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 
 const HeroStyle = styled.div`
+  padding: 90px 0px 30px;
   min-height: 200px;
   background: #424043;
   display: flex;
