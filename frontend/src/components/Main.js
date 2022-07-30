@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./Nav";
 import Hero from "./Hero";
 import NewTwootForm from "./NewTwootForm";
@@ -10,13 +10,14 @@ const MainWrapper = styled.div`
 `;
 
 const Main = () => {
+  const [isUpdate, setIsUpdate] = useState(false);
   return (
     <>
       <MainWrapper className="">
         <Nav />
         <Hero />
-        <NewTwootForm />
-        <TwootsList />
+        <NewTwootForm isUpdate={isUpdate} setIsUpdate={setIsUpdate} />
+        <TwootsList isUpdate={isUpdate} />
       </MainWrapper>
     </>
   );

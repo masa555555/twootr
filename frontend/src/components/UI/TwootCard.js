@@ -14,16 +14,6 @@ const TwootCardStyle = styled.li`
     height: 40px;
   }
 
-  input {
-    width: 100%;
-    outline: none;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-bottom: 3px solid #333;
-    font-weight: bold;
-    font-size: 18px;
-  }
-
   & .card-top,
   & .card-bottom {
     padding: 0 1rem;

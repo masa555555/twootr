@@ -8,12 +8,13 @@ const TwootsListStyle = styled.ul`
   list-style: none;
 `;
 
-const TwootsList = () => {
+const TwootsList = (props) => {
+  const { isUpdate } = props;
   const [allTwoots, setAllTwoots] = useState([]);
 
   const fetchTwoots = () => {
     axios
-      .get("http://localhost:8080/twoots")
+      .get("/twoots")
       .then((res) => {
         console.log(res.data);
         setAllTwoots(res.data);
@@ -22,7 +23,7 @@ const TwootsList = () => {
   };
   useEffect(() => {
     fetchTwoots();
-  }, []);
+  }, [isUpdate]);
 
   const twoots =
     allTwoots &&
