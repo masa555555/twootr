@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { IoFlagSharp } from "react-icons/io5";
 
 const TwootCardStyle = styled.li`
-  box-shadow: 0 0 0 #333;
+  box-shadow: 5px 5px 2px 1px #888888;
   border: 3px solid #333;
   padding: 1rem;
   margin-bottom: 1rem;
