@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { FaAngleDoubleDown } from "react-icons/fa";
 
 const HeaderStyle = styled.header`
   min-height: 60px;
@@ -26,6 +27,17 @@ const HeaderStyle = styled.header`
   strong {
     color: #fff;
   }
+
+  & .header-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & svg {
+      font-size: 24px;
+    }
+  }
 `;
 
 const Nav = () => {
@@ -39,6 +51,9 @@ const Nav = () => {
           <span>
             <strong>Write</strong> a new tweet
           </span>
+          <label htmlFor="newTwootForm">
+            <FaAngleDoubleDown />
+          </label>
         </section>
       </div>
     </HeaderStyle>
