@@ -45,6 +45,16 @@ const TwootCardStyle = styled.li`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    & .flagIcon,
+    & .retwootIcon,
+    & .favoriteIcon {
+      color: #888888;
+    }
+
+    /* & .favoriteIcon {
+      color: violet;
+    } */
   }
 `;
 
@@ -103,9 +113,9 @@ const TwootCard = (props) => {
       <section className="card-bottom">
         <span className="date">Twooted {diffDate && diffDate} days ago</span>
         <div className="icons">
-          <IoFlagSharp />
-          <AiOutlineRetweet />
-          <AiFillHeart />
+          <IoFlagSharp className="flagIcon" />
+          <AiOutlineRetweet className="retwootIcon" />
+          <AiFillHeart className="favoriteIcon" />
         </div>
       </section>
     </TwootCardStyle>

@@ -95,6 +95,7 @@ const NewTwootForm = (props) => {
         textInputRef.current.value = "";
         setWordCount(140);
         notify("Successfully twooted!");
+        setTimeout(() => {}, 500);
       })
       .catch((error) => console.log(error));
   };
