@@ -7,8 +7,10 @@ function App() {
     <div className="App">
       <Main />
       <ToastContainer
+        style={{ color: "red" }}
+        toastClassName="foo"
         position="bottom-left"
-        autoClose={3000}
+        autoClose={1000}
         hideProgressBar={true}
         newestOnTop={false}
         closeOnClick
