@@ -52,9 +52,17 @@ const TwootCardStyle = styled.li`
       color: #888888;
     }
 
-    /* & .favoriteIcon {
+    & .flagIcon.flag {
+      color: blue;
+    }
+
+    & .favoriteIcon.favorite {
       color: violet;
-    } */
+    }
+
+    & .retwootIcon.retwooted {
+      color: #36c736;
+    }
   }
 `;
 
@@ -71,6 +79,9 @@ const TwootCard = (props) => {
   } = props;
 
   const [diffDate, setDiffDate] = useState();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isRetwoot, setIsRetwoot] = useState(false);
+  const [isFlag, setIsFlag] = useState(false);
 
   const checkDateGap = () => {
     const now = new Date();
@@ -87,6 +98,18 @@ const TwootCard = (props) => {
     const diffMillSec = past - today;
     const diffDays = parseInt(diffMillSec / 1000 / 60 / 60 / 24);
     setDiffDate(diffDays);
+  };
+
+  const changeFlagIconStyle = () => {
+    setIsFlag(!isFlag);
+  };
+
+  const changeRetwootIconStyle = () => {
+    setIsRetwoot(!isRetwoot);
+  };
+
+  const changeFavoriteIconStyle = () => {
+    setIsFavorite(!isFavorite);
   };
 
   useEffect(() => {
@@ -113,9 +136,18 @@ const TwootCard = (props) => {
       <section className="card-bottom">
         <span className="date">Twooted {diffDate && diffDate} days ago</span>
         <div className="icons">
-          <IoFlagSharp className="flagIcon" />
-          <AiOutlineRetweet className="retwootIcon" />
-          <AiFillHeart className="favoriteIcon" />
+          <IoFlagSharp
+            className={`flagIcon ${isFlag ? "flag" : ""}`}
+            onClick={changeFlagIconStyle}
+          />
+          <AiOutlineRetweet
+            className={`retwootIcon ${isRetwoot ? "retwooted" : ""}`}
+            onClick={changeRetwootIconStyle}
+          />
+          <AiFillHeart
+            className={`favoriteIcon ${isFavorite ? "favorite" : ""}`}
+            onClick={changeFavoriteIconStyle}
+          />
         </div>
       </section>
     </TwootCardStyle>
