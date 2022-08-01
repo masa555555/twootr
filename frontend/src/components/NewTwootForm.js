@@ -1,11 +1,13 @@
-import React from "react";
+import axios from "axios";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
-const NewTwootFormStyle = styled.div`
+const NewTwootFormStyle = styled.form`
   padding: 2rem 100px 0;
 
   h2 {
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
   }
 
   button {
@@ -20,6 +22,7 @@ const NewTwootFormStyle = styled.div`
   }
 
   textarea {
+    font-weight: bold;
     width: 100%;
     outline: none;
     border: none;
@@ -30,8 +33,9 @@ const NewTwootFormStyle = styled.div`
     font-family: "Permanent Marker", cursive;
   }
 
-  & .form-top {
-    padding-bottom: 1rem;
+  & .form-title {
+    margin-top: 1.5rem;
+    padding-top: 0.5rem;
   }
 
   & .form-bottom {
@@ -39,25 +43,84 @@ const NewTwootFormStyle = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding-top: 0.5rem;
   }
 `;
 
-const NewTwootForm = () => {
+const getCurrentDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+
+  const today = `${year}-${month}-${date}`;
+  return today;
+};
+
+const NewTwootForm = (props) => {
+  const { isUpdate, setIsUpdate } = props;
+  const [wordCount, setWordCount] = useState(140);
+  const textInputRef = useRef();
+
+  const notify = (text) => toast(text);
+
+  const handleCount = (e) => {
+    const length = e.target.value.length;
+    if (length > 140) {
+      alert("Cannot enter more than 140 words");
+      return;
+    }
+    setWordCount(140 - length);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (textInputRef.current.value === "") {
+      alert("Invalid input");
+      return;
+    }
+
+    const nowDate = getCurrentDate();
+    const newTwoot = {
+      author: "props.user",
+      content: textInputRef.current.value,
+      authorSlug: "props.user",
+      dateAdded: nowDate,
+    };
+
+    axios
+      .post("http://localhost:8080/twoot", { newTwoot })
+      .then((res) => {
+        setIsUpdate(!isUpdate);
+        textInputRef.current.value = "";
+        setWordCount(140);
+        notify("Successfully twooted!");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
-    <NewTwootFormStyle>
-      <section className="form-title">
-        <h2>Compose Twoot</h2>
-      </section>
-      <section className="new-twoot-form">
-        <div className="form-top">
-          <textarea type="text" placeholder="What are you humming about?" />
-        </div>
-        <div className="form-bottom">
-          <button>Twoot</button>
-          <span>140</span>
-        </div>
-      </section>
-    </NewTwootFormStyle>
+    <>
+      <NewTwootFormStyle onSubmit={handleSubmit} id="newTwootForm">
+        <section className="form-title">
+          <h2>Compose Twoot</h2>
+        </section>
+        <section className="new-twoot-form">
+          <div className="form-top">
+            <textarea
+              onChange={handleCount}
+              ref={textInputRef}
+              type="text"
+              placeholder="What are you humming about?"
+            />
+          </div>
+          <div className="form-bottom">
+            <button>Twoot</button>
+            <span>{wordCount}</span>
+          </div>
+        </section>
+      </NewTwootFormStyle>
+    </>
   );
 };
 
