@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiFillHeart, AiOutlineRetweet } from "react-icons/ai";
 import { IoFlagSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const TwootCardStyle = styled.li`
   box-shadow: 5px 5px 2px 1px #888888;
@@ -50,6 +51,7 @@ const TwootCardStyle = styled.li`
     & .retwootIcon,
     & .favoriteIcon {
       color: #888888;
+      cursor: pointer;
     }
 
     & .flagIcon.flag {
@@ -82,6 +84,9 @@ const TwootCard = (props) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isRetwoot, setIsRetwoot] = useState(false);
   const [isFlag, setIsFlag] = useState(false);
+  const [favoriteTwoots, setFavoriteTwoots] = useState([]);
+
+  const notify = (text) => toast(text);
 
   const checkDateGap = () => {
     const now = new Date();
@@ -102,14 +107,26 @@ const TwootCard = (props) => {
 
   const changeFlagIconStyle = () => {
     setIsFlag(!isFlag);
+    isFlag === false && notify("Twoot flaged");
   };
 
   const changeRetwootIconStyle = () => {
     setIsRetwoot(!isRetwoot);
+    isRetwoot === false && notify("Twoot retwooted");
   };
 
   const changeFavoriteIconStyle = () => {
     setIsFavorite(!isFavorite);
+    setFavoriteTwoots(...favoriteTwoots, {
+      id: id,
+      author: author,
+      authorSlug: authorSlug,
+      content: content,
+      dateAdded: dateAdded,
+      dateModified: dateModified,
+      tags: tags,
+    });
+    isFavorite === false && notify("Twoot added to favorite");
   };
 
   useEffect(() => {

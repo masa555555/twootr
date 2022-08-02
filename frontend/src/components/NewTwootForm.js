@@ -58,7 +58,7 @@ const getCurrentDate = () => {
 };
 
 const NewTwootForm = (props) => {
-  const { isUpdate, setIsUpdate } = props;
+  const { isUpdate, setIsUpdate, user, setUser } = props;
   const [wordCount, setWordCount] = useState(140);
   const textInputRef = useRef();
 
@@ -82,9 +82,9 @@ const NewTwootForm = (props) => {
 
     const nowDate = getCurrentDate();
     const newTwoot = {
-      author: "props.user",
+      author: user.firstName + " " + user.lastName,
       content: textInputRef.current.value,
-      authorSlug: "props.user",
+      authorSlug: user.firstName + " " + user.lastName,
       dateAdded: nowDate,
     };
 
