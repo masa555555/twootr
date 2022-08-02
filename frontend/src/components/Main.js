@@ -12,17 +12,25 @@ const MainWrapper = styled.div`
 
 const Main = () => {
   const [isUpdate, setIsUpdate] = useState(false);
-  const [user,setUser] = useState({
-    firstName:'Joe',
-    lastName:'Doe'
-  })
+  const [user, setUser] = useState({
+    firstName: "Joe",
+    lastName: "Doe",
+  });
+  const [isFocus, setIsFocus] = useState(false);
 
   return (
     <>
       <MainWrapper id="pageTop">
-        <Nav />
+        <Nav isFocus={isFocus} setIsFocus={setIsFocus} />
         <Hero user={user} setUser={setUser} />
-        <NewTwootForm isUpdate={isUpdate} setIsUpdate={setIsUpdate} user={user} setUser={setUser} />
+        <NewTwootForm
+          isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          user={user}
+          setUser={setUser}
+          isFocus={isFocus}
+          setIsFocus={setIsFocus}
+        />
         <TwootsList isUpdate={isUpdate} />
         <BackToTopButton />
       </MainWrapper>

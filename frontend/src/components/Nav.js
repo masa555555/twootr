@@ -51,7 +51,11 @@ const HeaderStyle = styled.header`
   }
 `;
 
-const Nav = () => {
+const Nav = (props) => {
+  const { isFocus, setIsFocus } = props;
+  const handleClick = () => {
+    setIsFocus(!isFocus);
+  };
   return (
     <HeaderStyle>
       <div className="header-container">
@@ -61,10 +65,14 @@ const Nav = () => {
           </h3>
         </section>
         <section className="header-right">
-          <span>
+          <label htmlFor="twootText">
             <strong>Write</strong> a new tweet
-          </span>
-          <AnchorLink href="#newTwootForm">
+          </label>
+          {/* original */}
+          {/* <span>
+            <strong>Write</strong> a new tweet
+          </span> */}
+          <AnchorLink href="#newTwootForm" onClick={handleClick}>
             <FaAngleDoubleDown />
           </AnchorLink>
         </section>
