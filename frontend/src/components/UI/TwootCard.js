@@ -107,26 +107,30 @@ const TwootCard = (props) => {
 
   const changeFlagIconStyle = () => {
     setIsFlag(!isFlag);
-    isFlag === false && notify("Twoot flaged");
+    isFlag === false ? notify("Twoot flaged") : notify("Twoot unflaged");
   };
 
   const changeRetwootIconStyle = () => {
     setIsRetwoot(!isRetwoot);
-    isRetwoot === false && notify("Twoot retwooted");
+    isRetwoot === false
+      ? notify("Twoot retwooted")
+      : notify("Twoot unretwooted");
   };
 
   const changeFavoriteIconStyle = () => {
     setIsFavorite(!isFavorite);
-    setFavoriteTwoots(...favoriteTwoots, {
-      id: id,
-      author: author,
-      authorSlug: authorSlug,
-      content: content,
-      dateAdded: dateAdded,
-      dateModified: dateModified,
-      tags: tags,
-    });
-    isFavorite === false && notify("Twoot added to favorite");
+    // setFavoriteTwoots(...favoriteTwoots, {
+    //   id: id,
+    //   author: author,
+    //   authorSlug: authorSlug,
+    //   content: content,
+    //   dateAdded: dateAdded,
+    //   dateModified: dateModified,
+    //   tags: tags,
+    // });
+    isFavorite === false
+      ? notify("Twoot added to favorite")
+      : notify("Twoot removed from favorite");
   };
 
   useEffect(() => {
@@ -151,7 +155,12 @@ const TwootCard = (props) => {
         <p className="">{content}</p>
       </section>
       <section className="card-bottom">
-        <span className="date">Twooted {diffDate && diffDate} days ago</span>
+        {diffDate !== undefined && diffDate === 0 && (
+          <span className="date">Twooted Today</span>
+        )}
+        {diffDate !== undefined && diffDate !== 0 && (
+          <span className="date">Twooted {diffDate && diffDate} days ago</span>
+        )}
         <div className="icons">
           <IoFlagSharp
             className={`flagIcon ${isFlag ? "flag" : ""}`}
