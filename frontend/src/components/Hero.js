@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineCheck } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
+import e from "cors";
 
 const HeroStyle = styled.div`
   padding: 90px 0px 30px;
@@ -58,16 +59,25 @@ const HeroStyle = styled.div`
   }
 `;
 
-const Hero = () => {
+const Hero = (props) => {
+  const {user,setUser} = props
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleInputValue = () => {};
+  const handleInputValue = (event) => {
+    setUser({
+      ...user,
+      [event.target.name] : event.target.value
+    }
+    )
+  };
   const handleUpdateUser = () => {
     setIsEditing(false);
   };
   const handleOpenForm = () => {
     setIsEditing(true);
   };
+
+  console.log(user);
 
   return (
     <HeroStyle>
@@ -81,17 +91,18 @@ const Hero = () => {
         <section className="userInfo">
           {isEditing && (
             <div className="userInfo-form">
-              <input type="text" onChange={handleInputValue} />
-              <input type="text" onChange={handleInputValue} />
+              <input type="text" name="firstName" onChange={handleInputValue} />
+              <input type="text" name="lastName" onChange={handleInputValue} />
               <AiOutlineCheck onClick={handleUpdateUser} />
             </div>
           )}
           {!isEditing && (
             <div className="userInfo-currentUser">
               <h3>
-                Joe <span>Doe</span> <BsPencilSquare onClick={handleOpenForm} />
+                        
+                {user.firstName} <span>{user.lastName}</span> <BsPencilSquare onClick={handleOpenForm} />
               </h3>
-              <span>@joe-doe</span>
+              <span>@{user.firstName}-{user.lastName}</span>
             </div>
           )}
         </section>
