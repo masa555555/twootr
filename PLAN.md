@@ -47,7 +47,10 @@ const twoots = [twoot1,twoot2, ...];
 
 ```js
 
-const [user,setUser] = useState("");
+const [user,setUser] = useState({
+  firstName:'Joe',
+  lastName:'Doe'
+});
 
 const handleInputValue = () => {
   // check input value
