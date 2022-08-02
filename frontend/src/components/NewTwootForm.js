@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -58,7 +58,7 @@ const getCurrentDate = () => {
 };
 
 const NewTwootForm = (props) => {
-  const { isUpdate, setIsUpdate, user, setUser } = props;
+  const { isUpdate, setIsUpdate, user, isFocus, setIsFocus } = props;
   const [wordCount, setWordCount] = useState(140);
   const textInputRef = useRef();
 
@@ -71,6 +71,10 @@ const NewTwootForm = (props) => {
       return;
     }
     setWordCount(140 - length);
+  };
+
+  const handleMouseLeave = () => {
+    setIsFocus(false);
   };
 
   const handleSubmit = (e) => {
@@ -100,16 +104,24 @@ const NewTwootForm = (props) => {
       .catch((error) => console.log(error));
   };
 
+  useEffect(() => {
+    isFocus && textInputRef.current.focus();
+  }, [isFocus]);
+
   return (
     <>
       <NewTwootFormStyle onSubmit={handleSubmit} id="newTwootForm">
         <section className="form-title">
-          <h2>Compose Twoot</h2>
+          <h2>
+            <label htmlFor="twootText">Compose Twoot</label>
+          </h2>
         </section>
         <section className="new-twoot-form">
           <div className="form-top">
             <textarea
+              id="twootText"
               onChange={handleCount}
+              onBlur={handleMouseLeave}
               ref={textInputRef}
               type="text"
               placeholder="What are you humming about?"
