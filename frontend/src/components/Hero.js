@@ -60,15 +60,14 @@ const HeroStyle = styled.div`
 `;
 
 const Hero = (props) => {
-  const {user,setUser} = props
+  const { user, setUser } = props;
   const [isEditing, setIsEditing] = useState(false);
 
   const handleInputValue = (event) => {
     setUser({
       ...user,
-      [event.target.name] : event.target.value
-    }
-    )
+      [event.target.name]: event.target.value,
+    });
   };
   const handleUpdateUser = () => {
     setIsEditing(false);
@@ -84,7 +83,9 @@ const Hero = (props) => {
       <div className="hero-container">
         <section className="userImage">
           <img
-            src="https://avatars.dicebear.com/api/bottts/authorSlug.svg"
+            src={`https://avatars.dicebear.com/api/bottts/${
+              user.firstName + " " + user.lastName
+            }.svg`}
             alt=""
           />
         </section>
@@ -99,10 +100,12 @@ const Hero = (props) => {
           {!isEditing && (
             <div className="userInfo-currentUser">
               <h3>
-                        
-                {user.firstName} <span>{user.lastName}</span> <BsPencilSquare onClick={handleOpenForm} />
+                {user.firstName} <span>{user.lastName}</span>{" "}
+                <BsPencilSquare onClick={handleOpenForm} />
               </h3>
-              <span>@{user.firstName}-{user.lastName}</span>
+              <span>
+                @{user.firstName}-{user.lastName}
+              </span>
             </div>
           )}
         </section>
