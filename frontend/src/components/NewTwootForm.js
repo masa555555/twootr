@@ -27,6 +27,7 @@ const NewTwootFormStyle = styled.form`
     outline: none;
     border: none;
     border-bottom: 3px solid #333;
+    resize: none;
   }
 
   span {
@@ -88,7 +89,8 @@ const NewTwootForm = (props) => {
     const newTwoot = {
       author: user.firstName + " " + user.lastName,
       content: textInputRef.current.value,
-      authorSlug: user.firstName + " " + user.lastName,
+      authorSlug:
+        user.firstName.toLowerCase() + "-" + user.lastName.toLowerCase(),
       dateAdded: nowDate,
     };
 
