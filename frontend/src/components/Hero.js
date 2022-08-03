@@ -36,6 +36,10 @@ const HeroStyle = styled.div`
     font-size: 14px;
   }
 
+  svg {
+    cursor: pointer;
+  }
+
   & .hero-container {
     display: flex;
     flex-direction: column;
@@ -104,7 +108,7 @@ const Hero = (props) => {
                 <BsPencilSquare onClick={handleOpenForm} />
               </h3>
               <span>
-                @{user.firstName}-{user.lastName}
+                @{user.firstName.toLowerCase()}-{user.lastName.toLowerCase()}
               </span>
             </div>
           )}

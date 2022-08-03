@@ -148,7 +148,7 @@ const TwootCard = (props) => {
           <span>{author}</span>
         </div>
         <div className="username">
-          <span>@{author}</span>
+          <span>@{authorSlug}</span>
         </div>
       </section>
       <section className="card-content">
@@ -159,7 +159,9 @@ const TwootCard = (props) => {
           <span className="date">Twooted Today</span>
         )}
         {diffDate !== undefined && diffDate !== 0 && (
-          <span className="date">Twooted {diffDate && diffDate} days ago</span>
+          <span className="date">
+            Twooted {diffDate && Math.abs(diffDate)} days ago
+          </span>
         )}
         <div className="icons">
           <IoFlagSharp
