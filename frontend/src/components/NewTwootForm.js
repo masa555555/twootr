@@ -19,6 +19,10 @@ const NewTwootFormStyle = styled.form`
     border-radius: 8px;
     color: #fff;
     background: #711a75;
+
+    &.disable {
+      background: #b6b6b6;
+    }
   }
 
   textarea {
@@ -61,6 +65,7 @@ const getCurrentDate = () => {
 const NewTwootForm = (props) => {
   const { isUpdate, setIsUpdate, user, isFocus, setIsFocus } = props;
   const [wordCount, setWordCount] = useState(140);
+  const [isDisabled, setIsDisabled] = useState(false);
   const textInputRef = useRef();
 
   const notify = (text) => toast(text);
@@ -69,8 +74,10 @@ const NewTwootForm = (props) => {
     const length = e.target.value.length;
     if (length > 140) {
       alert("Cannot enter more than 140 words");
+      setIsDisabled(true);
       return;
     }
+    isDisabled === true && setIsDisabled(false);
     setWordCount(140 - length);
   };
 
@@ -130,7 +137,9 @@ const NewTwootForm = (props) => {
             />
           </div>
           <div className="form-bottom">
-            <button>Twoot</button>
+            <button disabled={isDisabled} className={isDisabled && "disable"}>
+              Twoot
+            </button>
             <span>{wordCount}</span>
           </div>
         </section>
