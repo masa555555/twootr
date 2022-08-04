@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <Main />
       <ToastContainer
-        style={{ color: "red" }}
         toastClassName="foo"
         position="bottom-left"
         autoClose={1000}

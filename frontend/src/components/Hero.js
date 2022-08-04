@@ -88,7 +88,7 @@ const Hero = (props) => {
         <section className="userImage">
           <img
             src={`https://avatars.dicebear.com/api/bottts/${
-              user.firstName + " " + user.lastName
+              user.firstName.toLowerCase() + "-" + user.lastName.toLowerCase()
             }.svg`}
             alt=""
           />
