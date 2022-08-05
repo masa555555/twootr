@@ -63,7 +63,7 @@ const getCurrentDate = () => {
 };
 
 const NewTwootForm = (props) => {
-  const { isUpdate, setIsUpdate, user, isFocus, setIsFocus } = props;
+  const { isUpdate, setIsUpdate, user, isFocus, setIsFocus, isEditing } = props;
   const [wordCount, setWordCount] = useState(140);
   const [isDisabled, setIsDisabled] = useState(false);
   const textInputRef = useRef();
@@ -117,6 +117,8 @@ const NewTwootForm = (props) => {
     isFocus && textInputRef.current.focus();
   }, [isFocus]);
 
+  console.log(isEditing);
+
   return (
     <>
       <NewTwootFormStyle onSubmit={handleSubmit} id="newTwootForm">
@@ -137,7 +139,10 @@ const NewTwootForm = (props) => {
             />
           </div>
           <div className="form-bottom">
-            <button disabled={isDisabled} className={isDisabled && "disable"}>
+            <button
+              disabled={isDisabled || isEditing ? true : false}
+              className={(isDisabled || isEditing) && "disable"}
+            >
               Twoot
             </button>
             <span>{wordCount}</span>

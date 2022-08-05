@@ -17,12 +17,18 @@ const Main = () => {
     lastName: "Doe",
   });
   const [isFocus, setIsFocus] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <>
       <MainWrapper id="pageTop">
         <Nav isFocus={isFocus} setIsFocus={setIsFocus} />
-        <Hero user={user} setUser={setUser} />
+        <Hero
+          user={user}
+          setUser={setUser}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        />
         <NewTwootForm
           isUpdate={isUpdate}
           setIsUpdate={setIsUpdate}
@@ -30,6 +36,7 @@ const Main = () => {
           setUser={setUser}
           isFocus={isFocus}
           setIsFocus={setIsFocus}
+          isEditing={isEditing}
         />
         <TwootsList isUpdate={isUpdate} />
         <BackToTopButton />
