@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useSyncExternalStore } from "react";
 import styled from "styled-components";
 import { AiOutlineCheck } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
@@ -64,8 +64,8 @@ const HeroStyle = styled.div`
 `;
 
 const Hero = (props) => {
-  const { user, setUser } = props;
-  const [isEditing, setIsEditing] = useState(false);
+  const { user, setUser, isEditing, setIsEditing } = props;
+  // const [isEditing, setIsEditing] = useState(false);
 
   const handleInputValue = (event) => {
     setUser({
@@ -96,8 +96,18 @@ const Hero = (props) => {
         <section className="userInfo">
           {isEditing && (
             <div className="userInfo-form">
-              <input type="text" name="firstName" onChange={handleInputValue} />
-              <input type="text" name="lastName" onChange={handleInputValue} />
+              <input
+                type="text"
+                name="firstName"
+                onChange={handleInputValue}
+                placeholder={user.firstName}
+              />
+              <input
+                type="text"
+                name="lastName"
+                onChange={handleInputValue}
+                placeholder={user.lastName}
+              />
               <AiOutlineCheck onClick={handleUpdateUser} />
             </div>
           )}
