@@ -1,5 +1,5 @@
 {
-  "proxy": "https://git.heroku.com/twootr0808.git",
+  "proxy": "https://twootr0808.herokuapp.com/",
   "name": "twootr",
   "version": "0.1.0",
   "private": true,

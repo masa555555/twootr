@@ -14,7 +14,7 @@ const TwootsList = (props) => {
 
   const fetchTwoots = () => {
     axios
-      .get("/twoots")
+      .get("https://twootr0808.herokuapp.com/twoots")
       .then((res) => {
         console.log(res.data);
         setAllTwoots(res.data);
